@@ -6,17 +6,19 @@ void start(){
 	printf("\t\tGuess the word before you hang the hangmen. Good luck!\n\n");
 }
 
-void printAlphabet(char *alphabet[]){
+void printAlphabet(char alphabet[]){
 	int i;
-	for(i = 0; i < 31; i++){
-		printf("%s",alphabet[i]);
+	for(i = 0; i < 26; i++){
+		printf("%c  ",alphabet[i]);
 	}
+	printf("\n\n");
 }
 
-void checkLetter(char *alphabet[], char *letter){
-	for (int i = 0; i < 31; i++){
+void checkLetter(char alphabet[], char letter){
+	char replace = ' ';
+	for (int i = 0; i < 26; i++){
 		if(alphabet[i] == letter){
-			alphabet[i] = (char*)"  ";
+			alphabet[i] = replace;
 		}
 	}
 }
@@ -24,11 +26,7 @@ void checkLetter(char *alphabet[], char *letter){
 int main(int argc, char const *argv[])
 {
 	char *words[8] = { "ABILITY", "ACTUALLY", "ADVENTURE", "BUILDING", "COMBINATION", "CONFLICT", "EQUIPMENT", "ETHNIC"};
-	char *alphabet[31] = { "A ", "B ", "C ", "D ", "E ", "F ", "\n",
-						 "G ", "H ", "I ", "J ", "K ", "L ", "\n",
-						 "M ", "N ", "O ", "P ", "Q ", "R ", "\n",
-						 "S ", "T ", "U ", "V ", "W ", "X ", "\n",
-						 "Y ", "Z", "\n"};
+	char alphabet[26] = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
 	char *hangmanDraw[] = {
 	
 	"   |--------|\n"
@@ -85,9 +83,9 @@ int main(int argc, char const *argv[])
 	printAlphabet(alphabet);
 	printf("%s\n",hangmanDraw[0]);
 
-	char *letter;
+	char letter;
 	printf("Enter a letter: ");
-	scanf("%s", letter);
+	scanf("%s", &letter);
 
 	checkLetter(alphabet, letter);
 	printAlphabet(alphabet);
